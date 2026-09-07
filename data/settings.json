@@ -1,0 +1,12 @@
+{
+  "season": "2026/27",
+  "teams": 8,
+  "initialCredits": 750,
+  "gameMode": "classic",
+  "defenseModifier": true,
+  "cleanSheetBonus": 1,
+  "repairUsesRemainingCredits": true,
+  "substitutions": "hybrid",
+  "repairChanges": "unlimited",
+  "repairReleaseValueSource": "Fantagazzetta January"
+}

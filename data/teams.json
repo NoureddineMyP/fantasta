@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "Squadra 1",
+    "credits": 750,
+    "players": []
+  },
+  {
+    "id": 2,
+    "name": "Squadra 2",
+    "credits": 750,
+    "players": []
+  },
+  {
+    "id": 3,
+    "name": "Squadra 3",
+    "credits": 750,
+    "players": []
+  },
+  {
+    "id": 4,
+    "name": "Squadra 4",
+    "credits": 750,
+    "players": []
+  },
+  {
+    "id": 5,
+    "name": "Squadra 5",
+    "credits": 750,
+    "players": []
+  },
+  {
+    "id": 6,
+    "name": "Squadra 6",
+    "credits": 750,
+    "players": []
+  },
+  {
+    "id": 7,
+    "name": "Squadra 7",
+    "credits": 750,
+    "players": []
+  },
+  {
+    "id": 8,
+    "name": "Squadra 8",
+    "credits": 750,
+    "players": []
+  }
+]
