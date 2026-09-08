@@ -36,6 +36,30 @@
     "quot": 4
   },
   {
+    "id": "albarracin-cagliari-a",
+    "name": "Albarracin",
+    "out_of_list": true,
+    "team": "Cagliari",
+    "role": "A",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 1,
+    "quot": 1
+  },
+  {
+    "id": "azon-como-a",
+    "name": "Azon",
+    "out_of_list": true,
+    "team": "Como",
+    "role": "A",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 1,
+    "quot": 1
+  },
+  {
     "id": "bayo-v-udinese-a",
     "name": "Bayo V.",
     "out_of_list": false,
@@ -142,7 +166,19 @@
     "fm": 5.5,
     "fvm": 24,
     "quot": 9
-  },,
+  },
+  {
+    "id": "buksa-udinese-a",
+    "name": "Buksa",
+    "out_of_list": true,
+    "team": "Udinese",
+    "role": "A",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 3,
+    "quot": 2
+  },
   {
     "id": "camarda-milan-a",
     "name": "Camarda",
@@ -192,6 +228,30 @@
     "quot": 9
   },
   {
+    "id": "dallinga-bologna-a",
+    "name": "Dallinga",
+    "out_of_list": true,
+    "team": "Bologna",
+    "role": "A",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 8,
+    "quot": 8
+  },
+  {
+    "id": "david-juventus-a",
+    "name": "David",
+    "out_of_list": true,
+    "team": "Juventus",
+    "role": "A",
+    "pgv": 1,
+    "mv": 5,
+    "fm": 5,
+    "fvm": 19,
+    "quot": 8
+  },
+  {
     "id": "davis-k-udinese-a",
     "name": "Davis K.",
     "out_of_list": false,
@@ -226,6 +286,18 @@
     "fm": 0,
     "fvm": 1,
     "quot": 1
+  },
+  {
+    "id": "dia-lazio-a",
+    "name": "Dia",
+    "out_of_list": true,
+    "team": "Lazio",
+    "role": "A",
+    "pgv": 2,
+    "mv": 6,
+    "fm": 6.25,
+    "fvm": 15,
+    "quot": 10
   },
   {
     "id": "diao-como-a",
@@ -372,6 +444,18 @@
     "quot": 8
   },
   {
+    "id": "gimenez-milan-a",
+    "name": "Gimenez",
+    "out_of_list": true,
+    "team": "Milan",
+    "role": "A",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 8,
+    "quot": 6
+  },
+  {
     "id": "giovane-napoli-a",
     "name": "Giovane",
     "out_of_list": false,
@@ -480,6 +564,18 @@
     "quot": 18
   },
   {
+    "id": "kuhn-como-a",
+    "name": "Kuhn",
+    "out_of_list": true,
+    "team": "Como",
+    "role": "A",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 4,
+    "quot": 3
+  },
+  {
     "id": "kulenovic-torino-a",
     "name": "Kulenovic",
     "out_of_list": false,
@@ -540,6 +636,18 @@
     "quot": 15
   },
   {
+    "id": "leao-milan-a",
+    "name": "Leao",
+    "out_of_list": true,
+    "team": "Milan",
+    "role": "A",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 56,
+    "quot": 18
+  },
+  {
     "id": "lisman-venezia-a",
     "name": "Lisman",
     "out_of_list": false,
@@ -574,6 +682,18 @@
     "fm": 6.5,
     "fvm": 9,
     "quot": 4
+  },
+  {
+    "id": "lukaku-napoli-a",
+    "name": "Lukaku",
+    "out_of_list": true,
+    "team": "Napoli",
+    "role": "A",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 34,
+    "quot": 10
   },
   {
     "id": "maldini-cagliari-a",
@@ -636,6 +756,30 @@
     "quot": 4
   },
   {
+    "id": "morata-como-a",
+    "name": "Morata",
+    "out_of_list": true,
+    "team": "Como",
+    "role": "A",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 5,
+    "quot": 4
+  },
+  {
+    "id": "moro-l-sassuolo-a",
+    "name": "Moro L.",
+    "out_of_list": true,
+    "team": "Sassuolo",
+    "role": "A",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 1,
+    "quot": 1
+  },
+  {
     "id": "mota-monza-a",
     "name": "Mota",
     "out_of_list": false,
@@ -696,6 +840,18 @@
     "quot": 5
   },
   {
+    "id": "nkunku-milan-a",
+    "name": "Nkunku",
+    "out_of_list": true,
+    "team": "Milan",
+    "role": "A",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 15,
+    "quot": 13
+  },
+  {
     "id": "noslin-lazio-a",
     "name": "Noslin",
     "out_of_list": false,
@@ -742,6 +898,18 @@
     "fm": 4.5,
     "fvm": 30,
     "quot": 14
+  },
+  {
+    "id": "petagna-monza-a",
+    "name": "Petagna",
+    "out_of_list": true,
+    "team": "Monza",
+    "role": "A",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 4,
+    "quot": 2
   },
   {
     "id": "piccoli-bologna-a",
@@ -802,6 +970,18 @@
     "fm": 7.75,
     "fvm": 55,
     "quot": 14
+  },
+  {
+    "id": "ratkov-lazio-a",
+    "name": "Ratkov",
+    "out_of_list": true,
+    "team": "Lazio",
+    "role": "A",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 17,
+    "quot": 9
   },
   {
     "id": "robinho-junior-genoa-a",
@@ -970,6 +1150,18 @@
     "fm": 10,
     "fvm": 30,
     "quot": 7
+  },
+  {
+    "id": "vaz-roma-a",
+    "name": "Vaz",
+    "out_of_list": true,
+    "team": "Roma",
+    "role": "A",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 3,
+    "quot": 1
   },
   {
     "id": "vitinha-o-genoa-a",
@@ -1284,6 +1476,18 @@
     "quot": 10
   },
   {
+    "id": "bjarkason-venezia-c",
+    "name": "Bjarkason",
+    "out_of_list": true,
+    "team": "Venezia",
+    "role": "C",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 2,
+    "quot": 1
+  },
+  {
     "id": "boloca-sassuolo-c",
     "name": "Boloca",
     "out_of_list": false,
@@ -1366,6 +1570,18 @@
     "fm": 6.75,
     "fvm": 20,
     "quot": 8
+  },
+  {
+    "id": "camara-a-udinese-c",
+    "name": "Camara A.",
+    "out_of_list": true,
+    "team": "Udinese",
+    "role": "C",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 2,
+    "quot": 1
   },
   {
     "id": "cambiaghi-bologna-c",
@@ -1740,6 +1956,18 @@
     "quot": 12
   },
   {
+    "id": "el-aynaoui-roma-c",
+    "name": "El Aynaoui",
+    "out_of_list": true,
+    "team": "Roma",
+    "role": "C",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 10,
+    "quot": 4
+  },
+  {
     "id": "el-azzouzi-a-frosinone-c",
     "name": "El Azzouzi A.",
     "out_of_list": false,
@@ -1918,6 +2146,18 @@
     "fm": 0,
     "fvm": 1,
     "quot": 1
+  },
+  {
+    "id": "fofana-y-milan-c",
+    "name": "Fofana Y.",
+    "out_of_list": true,
+    "team": "Milan",
+    "role": "C",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 8,
+    "quot": 4
   },
   {
     "id": "folorunsho-monza-c",
@@ -2134,6 +2374,18 @@
     "fm": 0,
     "fvm": 19,
     "quot": 8
+  },
+  {
+    "id": "iannoni-sassuolo-c",
+    "name": "Iannoni",
+    "out_of_list": true,
+    "team": "Sassuolo",
+    "role": "C",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 1,
+    "quot": 1
   },
   {
     "id": "ilic-lecce-c",
@@ -2580,6 +2832,18 @@
     "quot": 4
   },
   {
+    "id": "miretti-juventus-c",
+    "name": "Miretti",
+    "out_of_list": true,
+    "team": "Juventus",
+    "role": "C",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 5,
+    "quot": 3
+  },
+  {
     "id": "mkhitaryan-inter-c",
     "name": "Mkhitaryan",
     "out_of_list": false,
@@ -2734,6 +2998,18 @@
     "fm": 5.5,
     "fvm": 13,
     "quot": 8
+  },
+  {
+    "id": "ondrejka-parma-c",
+    "name": "Ondrejka",
+    "out_of_list": true,
+    "team": "Parma",
+    "role": "C",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 14,
+    "quot": 5
   },
   {
     "id": "ordonez-c-parma-c",
@@ -2916,6 +3192,18 @@
     "quot": 9
   },
   {
+    "id": "prati-cagliari-c",
+    "name": "Prati",
+    "out_of_list": true,
+    "team": "Cagliari",
+    "role": "C",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 5,
+    "quot": 4
+  },
+  {
     "id": "przyborek-lazio-c",
     "name": "Przyborek",
     "out_of_list": false,
@@ -3070,6 +3358,18 @@
     "fm": 6,
     "fvm": 8,
     "quot": 5
+  },
+  {
+    "id": "sorensen-o-parma-c",
+    "name": "Sorensen O.",
+    "out_of_list": true,
+    "team": "Parma",
+    "role": "C",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 9,
+    "quot": 3
   },
   {
     "id": "sow-genoa-c",
@@ -3360,6 +3660,18 @@
     "quot": 2
   },
   {
+    "id": "ahanor-atalanta-d",
+    "name": "Ahanor",
+    "out_of_list": true,
+    "team": "Atalanta",
+    "role": "D",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 10,
+    "quot": 6
+  },
+  {
     "id": "akanji-inter-d",
     "name": "Akanji",
     "out_of_list": false,
@@ -3408,6 +3720,18 @@
     "quot": 1
   },
   {
+    "id": "angelino-roma-d",
+    "name": "Angelino",
+    "out_of_list": true,
+    "team": "Roma",
+    "role": "D",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 9,
+    "quot": 3
+  },
+  {
     "id": "antov-monza-d",
     "name": "Antov",
     "out_of_list": false,
@@ -3430,6 +3754,18 @@
     "fm": 0,
     "fvm": 6,
     "quot": 4
+  },
+  {
+    "id": "athekame-milan-d",
+    "name": "Athekame",
+    "out_of_list": true,
+    "team": "Milan",
+    "role": "D",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 6,
+    "quot": 3
   },
   {
     "id": "aurelio-cagliari-d",
@@ -3804,6 +4140,18 @@
     "quot": 2
   },
   {
+    "id": "circati-parma-d",
+    "name": "Circati",
+    "out_of_list": true,
+    "team": "Parma",
+    "role": "D",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 14,
+    "quot": 6
+  },
+  {
     "id": "cittadini-frosinone-d",
     "name": "Cittadini",
     "out_of_list": false,
@@ -3852,6 +4200,18 @@
     "quot": 8
   },
   {
+    "id": "corrado-frosinone-d",
+    "name": "Corrado",
+    "out_of_list": true,
+    "team": "Frosinone",
+    "role": "D",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 1,
+    "quot": 1
+  },
+  {
     "id": "correia-t-venezia-d",
     "name": "Correia T.",
     "out_of_list": false,
@@ -3876,6 +4236,18 @@
     "quot": 8
   },
   {
+    "id": "cuenca-a-como-d",
+    "name": "Cuenca A.",
+    "out_of_list": true,
+    "team": "Como",
+    "role": "D",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 6,
+    "quot": 1
+  },
+  {
     "id": "de-silvestri-bologna-d",
     "name": "De Silvestri",
     "out_of_list": false,
@@ -3898,6 +4270,18 @@
     "fm": 6.75,
     "fvm": 15,
     "quot": 5
+  },
+  {
+    "id": "delli-carri-monza-d",
+    "name": "Delli Carri",
+    "out_of_list": true,
+    "team": "Monza",
+    "role": "D",
+    "pgv": 1,
+    "mv": 6,
+    "fm": 6,
+    "fvm": 8,
+    "quot": 4
   },
   {
     "id": "delprato-parma-d",
@@ -3970,6 +4354,18 @@
     "fm": 6.25,
     "fvm": 180,
     "quot": 31
+  },
+  {
+    "id": "djimsiti-atalanta-d",
+    "name": "Djimsiti",
+    "out_of_list": true,
+    "team": "Atalanta",
+    "role": "D",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 12,
+    "quot": 7
   },
   {
     "id": "dod-fiorentina-d",
@@ -4164,6 +4560,18 @@
     "quot": 4
   },
   {
+    "id": "gelli-j-frosinone-d",
+    "name": "Gelli J.",
+    "out_of_list": true,
+    "team": "Frosinone",
+    "role": "D",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 1,
+    "quot": 1
+  },
+  {
     "id": "ghilardi-roma-d",
     "name": "Ghilardi",
     "out_of_list": false,
@@ -4222,6 +4630,18 @@
     "fm": 0,
     "fvm": 1,
     "quot": 1
+  },
+  {
+    "id": "gutierrez-napoli-d",
+    "name": "Gutierrez",
+    "out_of_list": true,
+    "team": "Napoli",
+    "role": "D",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 20,
+    "quot": 8
   },
   {
     "id": "hainaut-venezia-d",
@@ -4620,6 +5040,18 @@
     "quot": 2
   },
   {
+    "id": "macchioni-sassuolo-d",
+    "name": "Macchioni",
+    "out_of_list": true,
+    "team": "Sassuolo",
+    "role": "D",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 1,
+    "quot": 1
+  },
+  {
     "id": "mancini-roma-d",
     "name": "Mancini",
     "out_of_list": false,
@@ -4680,6 +5112,18 @@
     "quot": 2
   },
   {
+    "id": "martin-genoa-d",
+    "name": "Martin",
+    "out_of_list": true,
+    "team": "Genoa",
+    "role": "D",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 6,
+    "quot": 4
+  },
+  {
     "id": "marusic-lazio-d",
     "name": "Marusic",
     "out_of_list": false,
@@ -4690,6 +5134,18 @@
     "fm": 6,
     "fvm": 15,
     "quot": 6
+  },
+  {
+    "id": "matturro-genoa-d",
+    "name": "Matturro",
+    "out_of_list": true,
+    "team": "Genoa",
+    "role": "D",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 2,
+    "quot": 1
   },
   {
     "id": "maye-monza-d",
@@ -4740,6 +5196,18 @@
     "quot": 8
   },
   {
+    "id": "missori-sassuolo-d",
+    "name": "Missori",
+    "out_of_list": true,
+    "team": "Sassuolo",
+    "role": "D",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 2,
+    "quot": 1
+  },
+  {
     "id": "mitaj-genoa-d",
     "name": "Mitaj",
     "out_of_list": false,
@@ -4750,6 +5218,18 @@
     "fm": 0,
     "fvm": 8,
     "quot": 4
+  },
+  {
+    "id": "mlacic-udinese-d",
+    "name": "Mlacic",
+    "out_of_list": true,
+    "team": "Udinese",
+    "role": "D",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 2,
+    "quot": 1
   },
   {
     "id": "molina-n-roma-d",
@@ -4822,6 +5302,18 @@
     "fm": 6,
     "fvm": 32,
     "quot": 13
+  },
+  {
+    "id": "norton-cuffy-genoa-d",
+    "name": "Norton-Cuffy",
+    "out_of_list": true,
+    "team": "Genoa",
+    "role": "D",
+    "pgv": 2,
+    "mv": 5.75,
+    "fm": 5.75,
+    "fvm": 11,
+    "quot": 8
   },
   {
     "id": "obert-cagliari-d",
@@ -4920,6 +5412,18 @@
     "quot": 6
   },
   {
+    "id": "oyono-j-frosinone-d",
+    "name": "Oyono J.",
+    "out_of_list": true,
+    "team": "Frosinone",
+    "role": "D",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 2,
+    "quot": 1
+  },
+  {
     "id": "palma-udinese-d",
     "name": "Palma",
     "out_of_list": false,
@@ -4992,6 +5496,18 @@
     "quot": 14
   },
   {
+    "id": "pedersen-torino-d",
+    "name": "Pedersen",
+    "out_of_list": true,
+    "team": "Torino",
+    "role": "D",
+    "pgv": 1,
+    "mv": 6,
+    "fm": 6,
+    "fvm": 9,
+    "quot": 5
+  },
+  {
     "id": "pedraza-lazio-d",
     "name": "Pedraza",
     "out_of_list": false,
@@ -5014,6 +5530,18 @@
     "fm": 0,
     "fvm": 5,
     "quot": 2
+  },
+  {
+    "id": "perez-m-lecce-d",
+    "name": "Perez M.",
+    "out_of_list": true,
+    "team": "Lecce",
+    "role": "D",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 1,
+    "quot": 1
   },
   {
     "id": "pieragnolo-sassuolo-d",
@@ -5086,6 +5614,18 @@
     "fm": 5,
     "fvm": 8,
     "quot": 3
+  },
+  {
+    "id": "raterink-cagliari-d",
+    "name": "Raterink",
+    "out_of_list": true,
+    "team": "Cagliari",
+    "role": "D",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 1,
+    "quot": 1
   },
   {
     "id": "rensch-roma-d",
@@ -5508,6 +6048,18 @@
     "quot": 4
   },
   {
+    "id": "vogliacco-genoa-d",
+    "name": "Vogliacco",
+    "out_of_list": true,
+    "team": "Genoa",
+    "role": "D",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 2,
+    "quot": 1
+  },
+  {
     "id": "vojvoda-udinese-d",
     "name": "Vojvoda",
     "out_of_list": false,
@@ -5553,6 +6105,18 @@
     "mv": 0,
     "fm": 0,
     "fvm": 8,
+    "quot": 4
+  },
+  {
+    "id": "zappa-cagliari-d",
+    "name": "Zappa",
+    "out_of_list": true,
+    "team": "Cagliari",
+    "role": "D",
+    "pgv": 1,
+    "mv": 6,
+    "fm": 6,
+    "fvm": 5,
     "quot": 4
   },
   {
@@ -5676,6 +6240,18 @@
     "quot": 1
   },
   {
+    "id": "ciocci-cagliari-p",
+    "name": "Ciocci",
+    "out_of_list": true,
+    "team": "Cagliari",
+    "role": "P",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 1,
+    "quot": 1
+  },
+  {
     "id": "contini-napoli-p",
     "name": "Contini",
     "out_of_list": false,
@@ -5760,6 +6336,18 @@
     "quot": 1
   },
   {
+    "id": "di-gregorio-juventus-p",
+    "name": "Di Gregorio",
+    "out_of_list": true,
+    "team": "Juventus",
+    "role": "P",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 8,
+    "quot": 9
+  },
+  {
     "id": "falcone-lecce-p",
     "name": "Falcone",
     "out_of_list": false,
@@ -5770,6 +6358,18 @@
     "fm": 4.25,
     "fvm": 20,
     "quot": 8
+  },
+  {
+    "id": "fruchtl-lecce-p",
+    "name": "Fruchtl",
+    "out_of_list": true,
+    "team": "Lecce",
+    "role": "P",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 1,
+    "quot": 1
   },
   {
     "id": "ghidotti-parma-p",
@@ -6036,6 +6636,18 @@
     "quot": 1
   },
   {
+    "id": "perin-juventus-p",
+    "name": "Perin",
+    "out_of_list": true,
+    "team": "Juventus",
+    "role": "P",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 4,
+    "quot": 6
+  },
+  {
     "id": "perri-torino-p",
     "name": "Perri",
     "out_of_list": false,
@@ -6096,6 +6708,18 @@
     "quot": 1
   },
   {
+    "id": "pizzignacco-monza-p",
+    "name": "Pizzignacco",
+    "out_of_list": true,
+    "team": "Monza",
+    "role": "P",
+    "pgv": 1,
+    "mv": 5,
+    "fm": 1,
+    "fvm": 1,
+    "quot": 1
+  },
+  {
     "id": "pozzi-venezia-p",
     "name": "Pozzi",
     "out_of_list": false,
@@ -6144,10 +6768,34 @@
     "quot": 1
   },
   {
+    "id": "rossi-f-atalanta-p",
+    "name": "Rossi F.",
+    "out_of_list": true,
+    "team": "Atalanta",
+    "role": "P",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 1,
+    "quot": 1
+  },
+  {
     "id": "russo-a-sassuolo-p",
     "name": "Russo A.",
     "out_of_list": false,
     "team": "Sassuolo",
+    "role": "P",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 1,
+    "quot": 1
+  },
+  {
+    "id": "samooja-lecce-p",
+    "name": "Samooja",
+    "out_of_list": true,
+    "team": "Lecce",
     "role": "P",
     "pgv": 0,
     "mv": 0,
@@ -6276,6 +6924,18 @@
     "quot": 1
   },
   {
+    "id": "suzuki-parma-p",
+    "name": "Suzuki",
+    "out_of_list": true,
+    "team": "Parma",
+    "role": "P",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 15,
+    "quot": 7
+  },
+  {
     "id": "svilar-roma-p",
     "name": "Svilar",
     "out_of_list": false,
@@ -6364,6 +7024,18 @@
     "name": "Vigorito",
     "out_of_list": false,
     "team": "Como",
+    "role": "P",
+    "pgv": 0,
+    "mv": 0,
+    "fm": 0,
+    "fvm": 1,
+    "quot": 1
+  },
+  {
+    "id": "vismara-atalanta-p",
+    "name": "Vismara",
+    "out_of_list": true,
+    "team": "Atalanta",
     "role": "P",
     "pgv": 0,
     "mv": 0,
