@@ -138,7 +138,158 @@ const AuctionApp = (() => {
     return teams.find(t => t.id === $("buyerTeam").value);
   }
 
-  function renderStats() {
+  
+function teamRoster(teamId) {
+  return state.purchases.filter(x => x.teamId === teamId);
+}
+
+function roleCount(teamId, role) {
+  return teamRoster(teamId).filter(x => x.playerRole === role).length;
+}
+
+function roleTarget(role) {
+  return { P: 3, D: 8, C: 8, A: 6 }[role] || 0;
+}
+
+function remainingSlots(teamId, role) {
+  return Math.max(0, roleTarget(role) - roleCount(teamId, role));
+}
+
+function estimateMaxBid(player, team) {
+  const credits = num(team.credits);
+  const targets = { P: 3, D: 8, C: 8, A: 6 };
+  const rosterSize = teamRoster(team.id).length;
+  const totalSlots = Object.values(targets).reduce((a, b) => a + b, 0);
+  const openSlots = Math.max(1, totalSlots - rosterSize);
+  const reserve = Math.max(openSlots - 1, 0);
+  const spendable = Math.max(1, credits - reserve);
+
+  const roleWeights = { P: 0.10, D: 0.18, C: 0.22, A: 0.38 };
+  const roleWeight = roleWeights[player.role] || 0.15;
+  const quot = Math.max(1, num(player.quot));
+  const fvm = num(player.fvm);
+  const fm = num(player.fm);
+
+  const quality = Math.max(
+    0.55,
+    Math.min(1.55, (fvm / quot) * 0.55 + Math.max(0, fm - 4.5) * 0.10)
+  );
+
+  const roleNeed = remainingSlots(team.id, player.role);
+  const urgency = roleNeed <= 1 ? 0.85 : roleNeed >= 4 ? 1.08 : 1.0;
+
+  const raw = spendable * roleWeight * quality * urgency;
+  return Math.max(
+    1,
+    Math.min(Math.floor(credits - reserve), Math.round(raw))
+  );
+}
+
+function bidVerdict(player, price, team) {
+  const max = estimateMaxBid(player, team);
+
+  if (price <= max * 0.65) {
+    return {
+      color: "emerald",
+      label: "OTTIMO",
+      text: `Prezzo molto interessante: sei ben sotto il tetto consigliato di ${money(max)} crediti.`
+    };
+  }
+
+  if (price <= max) {
+    return {
+      color: "sky",
+      label: "BUONO",
+      text: `Sei dentro il budget consigliato: tetto ${money(max)} crediti.`
+    };
+  }
+
+  if (price <= max * 1.25) {
+    return {
+      color: "amber",
+      label: "ALTO",
+      text: `Stai pagando sopra il tetto consigliato (${money(max)}). Valuta le alternative.`
+    };
+  }
+
+  return {
+    color: "red",
+    label: "STOP",
+    text: `Prezzo molto alto: supera il tetto consigliato di ${money(max)}. Meglio conservare crediti.`
+  };
+}
+
+function renderBidAdvice() {
+  const box = $("bidAdvice");
+  if (!box) return;
+
+  if (!selectedPlayer) {
+    box.innerHTML = `<div class="text-sm text-slate-500">Seleziona un giocatore per ottenere il prezzo massimo consigliato.</div>`;
+    return;
+  }
+
+  const team = currentTeam();
+  if (!team) return;
+
+  const price = Math.floor(num($("purchasePrice").value));
+  const max = estimateMaxBid(selectedPlayer, team);
+  const verdict = price > 0 ? bidVerdict(selectedPlayer, price, team) : null;
+  const need = remainingSlots(team.id, selectedPlayer.role);
+
+  const verdictClasses = {
+    emerald: "bg-emerald-100 text-emerald-800",
+    sky: "bg-sky-100 text-sky-800",
+    amber: "bg-amber-100 text-amber-800",
+    red: "bg-red-100 text-red-800"
+  };
+
+  const textClasses = {
+    emerald: "text-emerald-900",
+    sky: "text-sky-900",
+    amber: "text-amber-900",
+    red: "text-red-900"
+  };
+
+  const verdictHtml = verdict
+    ? `<div>
+        <span class="rounded-full ${verdictClasses[verdict.color]} px-3 py-1 text-xs font-black">${verdict.label}</span>
+        <p class="mt-2 text-sm font-semibold ${textClasses[verdict.color]}">${verdict.text}</p>
+      </div>`
+    : `<p class="text-sm text-slate-600">Inserisci una cifra per ricevere il giudizio in tempo reale.</p>`;
+
+  box.innerHTML = `
+    <div class="flex flex-wrap items-start justify-between gap-3">
+      <div>
+        <div class="text-xs font-bold uppercase tracking-wide text-slate-400">Assistente budget</div>
+        <div class="mt-1 text-2xl font-black">${money(max)} cr</div>
+        <div class="text-xs text-slate-500">tetto consigliato per ${esc(selectedPlayer.name)}</div>
+      </div>
+      ${verdictHtml}
+    </div>
+
+    <div class="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
+      <div class="rounded-xl bg-white p-3">
+        <div class="text-xs text-slate-400">Crediti</div>
+        <b>${money(team.credits)}</b>
+      </div>
+      <div class="rounded-xl bg-white p-3">
+        <div class="text-xs text-slate-400">Slot ${esc(selectedPlayer.role)}</div>
+        <b>${need}</b>
+      </div>
+      <div class="rounded-xl bg-white p-3">
+        <div class="text-xs text-slate-400">QUOT</div>
+        <b>${money(selectedPlayer.quot)}</b>
+      </div>
+      <div class="rounded-xl bg-white p-3">
+        <div class="text-xs text-slate-400">FM</div>
+        <b>${num(selectedPlayer.fm).toFixed(2)}</b>
+      </div>
+    </div>
+  `;
+}
+
+function renderStats() {
+  renderBidAdvice();
     const totalSpent = state.purchases.reduce((s,p) => s + num(p.price), 0);
     $("availableCount").textContent = money(availablePlayers().length);
     $("purchaseCount").textContent = money(state.purchases.length);
@@ -265,3 +416,9 @@ const AuctionApp = (() => {
   return { init };
 })();
 document.addEventListener("DOMContentLoaded", AuctionApp.init);
+
+document.addEventListener("input", (event) => {
+  if (event.target && event.target.id === "purchasePrice") {
+    renderBidAdvice();
+  }
+});
