@@ -30,17 +30,19 @@ async function football(resource, key) {
 }
 
 module.exports = async (req, res) => {
+  if (!process.env.BLOB_READ_WRITE_TOKEN) {
+    return res.status(503).json({ error: 'BLOB_READ_WRITE_TOKEN non configurato: collega uno store Blob al progetto e fai redeploy.' });
+  }
   if (req.method === 'GET') {
     try {
       const data = await readCurrent();
       return data ? res.status(200).json(data) : res.status(404).json({ error: 'Nessun aggiornamento live ancora salvato.' });
-    } catch {
-      return res.status(503).json({ error: 'Archivio live non configurato.' });
+    } catch (error) {
+      return res.status(503).json({ error: `Impossibile accedere a Vercel Blob: ${error.message}` });
     }
   }
   if (req.method !== 'POST') return res.status(405).json({ error: 'Metodo non consentito.' });
   if (!process.env.API_FOOTBALL_KEY) return res.status(503).json({ error: 'API_FOOTBALL_KEY non configurata.' });
-  if (!process.env.BLOB_READ_WRITE_TOKEN) return res.status(503).json({ error: 'Vercel Blob non configurato.' });
 
   try {
     const [injuries, fixtures] = await Promise.all([
