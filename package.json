@@ -1,0 +1,9 @@
+{
+  "name": "fanta-asta",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Assistente per asta fantacalcio",
+  "dependencies": {
+    "@vercel/blob": "^2.2.0"
+  }
+}

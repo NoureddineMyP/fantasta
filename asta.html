@@ -1,81 +1,100 @@
 <!doctype html>
 <html lang="it">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Asta Live · Fanta Asta 26/27</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="min-h-screen bg-slate-50 text-slate-900">
-<header class="border-b border-slate-200 bg-white">
-  <div class="mx-auto max-w-7xl px-4 py-4 sm:px-6 flex items-center justify-between">
-    <div>
-      <a href="./index.html" class="text-sm font-semibold text-slate-500 hover:text-slate-900">← Dashboard</a>
-      <h1 class="mt-1 text-2xl font-black">Asta Live</h1>
-      <p class="text-sm text-slate-500">Registra acquisti, crediti e suggerimenti mentre battete l'asta.</p>
+  <header class="border-b border-slate-200 bg-white">
+    <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
+      <div><a href="./index.html" class="text-sm font-semibold text-slate-500 hover:text-slate-900">← Dashboard</a>
+        <h1 class="mt-1 text-2xl font-black">Asta Live</h1>
+        <p class="text-sm text-slate-500">Registra gli acquisti e ricevi un consiglio in tempo reale.</p>
+      </div><button id="resetAuction"
+        class="rounded-xl border border-red-200 bg-red-50 px-4 py-2 text-sm font-bold text-red-700 hover:bg-red-100">Reset
+        asta</button>
     </div>
-    <button id="resetAuction" class="rounded-xl border border-red-200 bg-red-50 px-4 py-2 text-sm font-bold text-red-700 hover:bg-red-100">Reset asta</button>
-  </div>
-</header>
-
-<main id="app" class="mx-auto max-w-7xl px-4 py-6 sm:px-6">
-  <section class="grid gap-4 sm:grid-cols-3">
-    <div class="rounded-2xl bg-white p-4 border border-slate-200"><div class="text-xs uppercase font-bold text-slate-400">Disponibili</div><div id="availableCount" class="mt-1 text-2xl font-black">—</div></div>
-    <div class="rounded-2xl bg-white p-4 border border-slate-200"><div class="text-xs uppercase font-bold text-slate-400">Acquisti</div><div id="purchaseCount" class="mt-1 text-2xl font-black">—</div></div>
-    <div class="rounded-2xl bg-white p-4 border border-slate-200"><div class="text-xs uppercase font-bold text-slate-400">Crediti spesi</div><div id="spentCount" class="mt-1 text-2xl font-black">—</div></div>
-  </section>
-
-  <section class="mt-6 grid gap-6 lg:grid-cols-[1.5fr_1fr]">
-    <div class="space-y-6">
-      <div class="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
-        <h2 class="text-lg font-black">1. Chi è sul palco?</h2>
-        <div class="relative mt-4">
-          <input id="playerSearch" autocomplete="off" placeholder="Cerca giocatore…" class="w-full rounded-2xl border border-slate-200 px-4 py-4 outline-none focus:border-slate-400">
-          <div id="playerSuggestions" class="absolute z-20 mt-2 hidden max-h-96 w-full overflow-auto rounded-2xl border border-slate-200 bg-white shadow-xl"></div>
-        </div>
-        <div id="selectedPlayer" class="mt-4 rounded-2xl border border-dashed border-slate-200 p-5">
-          <div class="text-sm text-slate-500">Nessun giocatore selezionato.</div>
-        </div>
+  </header>
+  <main id="app" class="mx-auto max-w-7xl px-4 py-6 sm:px-6">
+    <section class="grid gap-4 sm:grid-cols-3">
+      <div class="rounded-2xl border bg-white p-4">
+        <div class="text-xs font-bold uppercase text-slate-400">Disponibili</div>
+        <div id="availableCount" class="mt-1 text-2xl font-black">—</div>
       </div>
-
-      <div class="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
-        <h2 class="text-lg font-black">2. Chi lo compra?</h2>
-        <div class="mt-4 grid gap-4 sm:grid-cols-2">
-          <div>
-            <label class="mb-1 block text-xs font-bold uppercase tracking-wide text-slate-400">Fantallenatore</label>
-            <select id="buyerTeam" class="w-full rounded-2xl border border-slate-200 px-4 py-3"></select>
+      <div class="rounded-2xl border bg-white p-4">
+        <div class="text-xs font-bold uppercase text-slate-400">Acquisti</div>
+        <div id="purchaseCount" class="mt-1 text-2xl font-black">—</div>
+      </div>
+      <div class="rounded-2xl border bg-white p-4">
+        <div class="text-xs font-bold uppercase text-slate-400">Crediti spesi</div>
+        <div id="spentCount" class="mt-1 text-2xl font-black">—</div>
+      </div>
+    </section>
+    <section class="mt-6 grid gap-6 lg:grid-cols-[1.5fr_1fr]">
+      <div class="space-y-6">
+        <div class="rounded-3xl border bg-white p-5 shadow-sm">
+          <h2 class="text-lg font-black">1. Giocatore sul palco</h2>
+          <div class="relative mt-4"><input id="playerSearch" autocomplete="off"
+              placeholder="Cerca giocatore o squadra…"
+              class="w-full rounded-2xl border px-4 py-4 outline-none focus:border-indigo-400">
+            <div id="playerSuggestions"
+              class="absolute z-20 mt-2 hidden max-h-96 w-full overflow-auto rounded-2xl border bg-white shadow-xl">
+            </div>
           </div>
-          <div>
-            <label class="mb-1 block text-xs font-bold uppercase tracking-wide text-slate-400">Prezzo finale</label>
-            <input id="purchasePrice" type="number" min="1" step="1" placeholder="es. 37" class="w-full rounded-2xl border border-slate-200 px-4 py-3">
+          <div id="selectedPlayer" class="mt-4 rounded-2xl border border-dashed p-5">
+            <p class="text-sm text-slate-500">Nessun giocatore selezionato.</p>
           </div>
         </div>
-        <div class="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-slate-50 p-4">
-          <div><div class="text-xs font-bold uppercase text-slate-400">Crediti residui</div><div id="teamCredits" class="text-xl font-black">—</div></div>
-          <button id="buyButton" class="rounded-2xl bg-slate-900 px-6 py-3 font-black text-white hover:bg-slate-700">Conferma acquisto</button>
+        <div class="rounded-3xl border bg-white p-5 shadow-sm">
+          <h2 class="text-lg font-black">2. Aggiudicazione</h2>
+          <div class="mt-4 grid gap-4 sm:grid-cols-2"><label
+              class="text-xs font-bold uppercase tracking-wide text-slate-400">Fantallenatore<select id="buyerTeam"
+                class="mt-1 block w-full rounded-2xl border px-4 py-3 text-sm font-normal text-slate-900"></select></label><label
+              class="text-xs font-bold uppercase tracking-wide text-slate-400">Prezzo finale<input id="purchasePrice"
+                type="number" min="1" step="1" placeholder="es. 37"
+                class="mt-1 block w-full rounded-2xl border px-4 py-3 text-base font-normal text-slate-900"></label>
+          </div>
+          <div class="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-slate-50 p-4">
+            <div>
+              <div class="text-xs font-bold uppercase text-slate-400">Crediti residui</div>
+              <div id="teamCredits" class="text-xl font-black">—</div>
+            </div><button id="buyButton"
+              class="rounded-2xl bg-slate-900 px-6 py-3 font-black text-white hover:bg-slate-700">Conferma
+              acquisto</button>
+          </div>
+        </div>
+        <div id="bidAdvice" class="rounded-3xl border border-indigo-100 bg-indigo-50 p-5">
+          <p class="text-sm text-slate-500">Seleziona un giocatore per ricevere il tetto consigliato.</p>
+        </div>
+        <div id="strategicAdvice" class="rounded-3xl border border-violet-100 bg-violet-50 p-5">
+          <p class="text-sm text-slate-500">La priorità della rosa apparirà qui.</p>
+        </div>
+        <div id="rosterAudit" class="rounded-3xl border border-emerald-100 bg-emerald-50 p-5">
+          <p class="text-sm text-slate-500">L'audit della rosa apparirà qui.</p>
+        </div>
+        <div class="rounded-3xl border border-sky-100 bg-sky-50 p-5">
+          <div class="flex flex-wrap items-start justify-between gap-3"><div><p class="text-xs font-bold uppercase text-sky-600">Dati live Serie A</p><p class="mt-1 text-lg font-black">Infortuni della tua rosa</p></div><button id="syncFootballData" class="rounded-xl bg-sky-700 px-4 py-2 text-sm font-bold text-white hover:bg-sky-600">Aggiorna dati</button></div>
+          <div id="footballDataStatus" class="mt-3 text-sm text-slate-600">Aggiornamento manuale: salva un JSON live condiviso per tutti i dispositivi.</div>
+        </div>
+        <div class="rounded-3xl border bg-white p-5 shadow-sm">
+          <h2 class="text-lg font-black">Rose</h2>
+          <div id="squads" class="mt-4 grid gap-3 md:grid-cols-2"></div>
         </div>
       </div>
-
-      <div class="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
-        <h2 class="text-lg font-black">Rose</h2>
-        <div id="squads" class="mt-4 grid gap-3 md:grid-cols-2"></div>
-      </div>
-    </div>
-
-    <aside class="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm h-fit">
-      <h2 class="text-lg font-black">Ultimi acquisti</h2>
-      <div id="recentPurchases" class="mt-3"></div>
-      <div class="mt-5 rounded-2xl bg-amber-50 p-4 text-xs leading-5 text-amber-800">
-        <b>Nota:</b> questa prima versione salva lo stato nel browser tramite localStorage. È perfetta per il prototipo e per una singola postazione; nel prossimo step possiamo collegarla alle API/Vercel per avere uno stato condiviso tra più dispositivi.
-      </div>
-    </aside>
-  </section>
-
-<div id="bidAdvice" class="mt-4 rounded-2xl border border-indigo-100 bg-indigo-50 p-4">
-  <div class="text-sm text-slate-500">Seleziona un giocatore per ottenere il prezzo massimo consigliato.</div>
-</div>
-</main>
-
-<script src="./js/auction.js"></script>
+      <aside class="h-fit rounded-3xl border bg-white p-5 shadow-sm">
+        <h2 class="text-lg font-black">Ultimi acquisti</h2>
+        <div id="recentPurchases" class="mt-3"></div>
+        <p class="mt-5 rounded-2xl bg-slate-50 p-4 text-xs leading-5 text-slate-500">I dati vengono salvati su questo
+          browser. Apri la dashboard per un riepilogo aggiornato.</p>
+      </aside>
+    </section>
+  </main>
+  <script src="./js/auction.js"></script>
+  <script src="./js/football.js"></script>
 </body>
+
 </html>

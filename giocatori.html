@@ -1,1 +1,71 @@
-<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Giocatori · Fanta Asta 26/27</title><script src="https://cdn.tailwindcss.com"></script></head><body class="min-h-screen bg-slate-50 text-slate-900"><header class="bg-white border-b border-slate-200"><div class="max-w-7xl mx-auto px-4 py-5"><a href="./index.html" class="text-sm text-slate-500">← Dashboard</a><div class="flex justify-between items-center"><div><h1 class="text-2xl font-black mt-1">Database giocatori</h1><p class="text-sm text-slate-500">Lista completa · 587 giocatori</p></div><div id="resultCount" class="rounded-2xl bg-slate-900 text-white px-4 py-3 font-black">—</div></div></div></header><main class="max-w-7xl mx-auto px-4 py-6"><section class="bg-white border border-slate-200 rounded-3xl p-4 shadow-sm"><div class="grid gap-3 md:grid-cols-[1fr_180px_220px_auto]"><input id="searchInput" class="rounded-xl border px-4 py-3" placeholder="Cerca nome o squadra…"><select id="roleFilter" class="rounded-xl border px-4 py-3"><option value="">Tutti i ruoli</option><option value="P">P · Portieri</option><option value="D">D · Difensori</option><option value="C">C · Centrocampisti</option><option value="A">A · Attaccanti</option></select><select id="teamFilter" class="rounded-xl border px-4 py-3"><option value="">Tutte le squadre</option></select><div class="flex gap-2"><label class="flex items-center gap-2 border rounded-xl px-3"><input id="onlyListed" type="checkbox"> Solo in lista</label><button id="resetFilters" class="rounded-xl bg-slate-100 px-4 font-bold">Reset</button></div></div></section><section class="mt-6 overflow-x-auto rounded-3xl border bg-white shadow-sm hidden md:block"><table class="w-full min-w-[900px] text-sm"><thead class="bg-slate-50 text-xs uppercase text-slate-400"><tr><th class="p-3 text-left" data-sort="name">Giocatore</th><th>Ruolo</th><th class="text-left">Squadra</th><th data-sort="pgv">PGv</th><th data-sort="mv">MV</th><th data-sort="fm">FM</th><th data-sort="fvm">FVM</th><th data-sort="quot">QUOT</th><th>Lista</th></tr></thead><tbody id="playersTableBody"></tbody></table></section><section id="playersCards" class="grid gap-3 mt-6 md:hidden"></section></main><div id="modal" class="fixed inset-0 hidden items-center justify-center bg-black/50 p-4"><div class="bg-white rounded-3xl p-6 w-full max-w-2xl"><div class="flex justify-end"><button id="closeModal" class="bg-slate-100 rounded-xl px-3 py-2 font-bold">Chiudi</button></div><div id="modalBody"></div></div></div><script src="./js/players.js"></script></body></html>
+<!doctype html>
+<html lang="it">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Giocatori · Fanta Asta 26/27</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-slate-50 text-slate-900">
+    <header class="bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 py-5"><a href="./index.html" class="text-sm text-slate-500">← Dashboard</a>
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl font-black mt-1">Database giocatori</h1>
+                    <p class="text-sm text-slate-500">Lista completa · 587 giocatori</p>
+                </div>
+                <div id="resultCount" class="rounded-2xl bg-slate-900 text-white px-4 py-3 font-black">—</div>
+            </div>
+        </div>
+    </header>
+    <main class="max-w-7xl mx-auto px-4 py-6">
+        <section class="bg-white border border-slate-200 rounded-3xl p-4 shadow-sm">
+            <div class="grid gap-3 md:grid-cols-[1fr_180px_220px_auto]"><input id="searchInput"
+                    class="rounded-xl border px-4 py-3" placeholder="Cerca nome o squadra…"><select id="roleFilter"
+                    class="rounded-xl border px-4 py-3">
+                    <option value="">Tutti i ruoli</option>
+                    <option value="P">P · Portieri</option>
+                    <option value="D">D · Difensori</option>
+                    <option value="C">C · Centrocampisti</option>
+                    <option value="A">A · Attaccanti</option>
+                </select><select id="teamFilter" class="rounded-xl border px-4 py-3">
+                    <option value="">Tutte le squadre</option>
+                </select>
+                <div class="flex gap-2"><label class="flex items-center gap-2 border rounded-xl px-3"><input
+                            id="onlyListed" type="checkbox"> Solo in lista</label><button id="resetFilters"
+                        class="rounded-xl bg-slate-100 px-4 font-bold">Reset</button></div>
+            </div>
+        </section>
+        <section class="mt-6 overflow-x-auto rounded-3xl border bg-white shadow-sm hidden md:block">
+            <table class="w-full min-w-[900px] text-sm">
+                <thead class="bg-slate-50 text-xs uppercase text-slate-400">
+                    <tr>
+                        <th class="p-3 text-left" data-sort="name">Giocatore</th>
+                        <th>Ruolo</th>
+                        <th class="text-left">Squadra</th>
+                        <th data-sort="pgv">PGv</th>
+                        <th data-sort="mv">MV</th>
+                        <th data-sort="fm">FM</th>
+                        <th data-sort="fvm">FVM</th>
+                        <th data-sort="quot">QUOT</th>
+                        <th>Lista</th>
+                    </tr>
+                </thead>
+                <tbody id="playersTableBody"></tbody>
+            </table>
+        </section>
+        <section id="playersCards" class="grid gap-3 mt-6 md:hidden"></section>
+    </main>
+    <div id="modal" class="fixed inset-0 hidden items-center justify-center bg-black/50 p-4">
+        <div class="bg-white rounded-3xl p-6 w-full max-w-2xl">
+            <div class="flex justify-end"><button id="closeModal"
+                    class="bg-slate-100 rounded-xl px-3 py-2 font-bold">Chiudi</button></div>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+    <script src="./js/players.js"></script>
+</body>
+
+</html>
