@@ -2,39 +2,66 @@
 <html lang="it">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fanta Asta 26/27</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fanta Asta 26/27</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Manrope', 'ui-sans-serif', 'system-ui', 'sans-serif'] },
+          colors: {
+            brand: { 50: '#EEF6F1', 100: '#D7EBDD', 200: '#AFD7BC', 300: '#7EBC95', 400: '#4C9C6D', 500: '#2B7F4F', 600: '#1F6B41', 700: '#185535', 800: '#123F27', 900: '#0C2A1A' },
+            gold: { 50: '#FBF6E9', 100: '#F3E6C0', 200: '#E7CE8A', 300: '#D8B45C', 400: '#C89B3C', 500: '#AD8330' }
+          }
+        }
+      }
+    }
+  </script>
 </head>
 
-<body class="min-h-screen bg-slate-950 text-slate-100">
-    <main class="mx-auto max-w-7xl px-4 py-8 sm:px-6">
-        <header class="flex flex-col justify-between gap-5 border-b border-slate-800 pb-8 sm:flex-row sm:items-end">
-            <div>
-                <p class="text-sm font-bold uppercase tracking-[.2em] text-indigo-400">Stagione 2026/27</p>
-                <h1 class="mt-2 text-4xl font-black tracking-tight">Fanta Asta</h1>
-                <p class="mt-2 text-slate-400">La cabina di regia della tua asta: rose, crediti e decisioni rapide.</p>
-            </div>
-            <nav class="flex flex-wrap gap-3"><a href="./asta.html"
-                    class="rounded-xl bg-indigo-500 px-5 py-3 text-sm font-black text-white hover:bg-indigo-400">Apri
-                    asta live →</a><a href="./giocatori.html"
-                    class="rounded-xl border border-slate-700 px-5 py-3 text-sm font-bold hover:bg-slate-900">Database
-                    giocatori</a></nav>
-        </header>
-        <section id="summary" class="mt-8 grid gap-4 sm:grid-cols-3"></section>
-        <section class="mt-8">
-            <div class="flex items-end justify-between gap-4">
-                <div>
-                    <h2 class="text-xl font-black">Situazione squadre</h2>
-                    <p class="mt-1 text-sm text-slate-400">Aggiornata con gli acquisti registrati nell’asta live.</p>
-                </div><a href="./asta.html" class="text-sm font-bold text-indigo-300 hover:text-indigo-200">Gestisci
-                    rose →</a>
-            </div>
-            <div id="teams" class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"></div>
-        </section>
-    </main>
-    <script src="./js/app.js"></script>
+<body class="min-h-screen bg-[#F6F7F5] font-sans text-slate-900">
+  <nav class="sticky top-0 z-30 bg-gradient-to-r from-brand-800 to-brand-600 text-white shadow-sm">
+    <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+      <a href="./index.html" class="flex items-center gap-2.5 font-extrabold tracking-tight">
+        <span class="grid h-8 w-8 place-items-center rounded-lg bg-white/15 text-sm">FA</span>
+        Fanta Asta <span class="font-medium text-brand-200">26/27</span>
+      </a>
+      <div class="flex items-center gap-1 text-sm font-semibold">
+        <a href="./index.html" class="rounded-lg bg-white/15 px-3 py-2">Dashboard</a>
+        <a href="./asta.html" class="rounded-lg px-3 py-2 transition hover:bg-white/10">Asta live</a>
+        <a href="./giocatori.html" class="rounded-lg px-3 py-2 transition hover:bg-white/10">Giocatori</a>
+      </div>
+    </div>
+  </nav>
+  <main class="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+    <header class="flex flex-col justify-between gap-5 border-b border-slate-200 pb-8 sm:flex-row sm:items-end">
+      <div>
+        <p class="text-sm font-bold uppercase tracking-[.2em] text-brand-700">Stagione 2026/27</p>
+        <h1 class="mt-2 text-4xl font-extrabold tracking-tight">Fanta Asta</h1>
+        <p class="mt-2 text-slate-500">La cabina di regia della tua asta: rose, crediti e decisioni rapide.</p>
+      </div>
+      <a href="./asta.html"
+        class="w-fit rounded-xl bg-brand-600 px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-brand-700">Apri
+        asta live →</a>
+    </header>
+    <section id="summary" class="mt-8 grid gap-4 sm:grid-cols-3"></section>
+    <section class="mt-8">
+      <div class="flex items-end justify-between gap-4">
+        <div>
+          <h2 class="text-xl font-extrabold">Situazione squadre</h2>
+          <p class="mt-1 text-sm text-slate-500">Aggiornata con gli acquisti registrati nell’asta live.</p>
+        </div><a href="./asta.html" class="text-sm font-bold text-brand-700 hover:text-brand-800">Gestisci
+          rose →</a>
+      </div>
+      <div id="teams" class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"></div>
+    </section>
+  </main>
+  <script src="./js/app.js"></script>
 </body>
 
 </html>
