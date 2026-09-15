@@ -1,0 +1,13 @@
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Manrope', 'ui-sans-serif', 'system-ui', 'sans-serif'] },
+          colors: {
+            brand: { 50: '#EEF6F1', 100: '#D7EBDD', 200: '#AFD7BC', 300: '#7EBC95', 400: '#4C9C6D', 500: '#2B7F4F', 600: '#1F6B41', 700: '#185535', 800: '#123F27', 900: '#0C2A1A' },
+            gold: { 50: '#FBF6E9', 100: '#F3E6C0', 200: '#E7CE8A', 300: '#D8B45C', 400: '#C89B3C', 500: '#AD8330' }
+          }
+        }
+      }
+    }
+  </script>
