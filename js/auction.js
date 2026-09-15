@@ -106,7 +106,7 @@ const AuctionApp = (() => {
     }
     function squads() {
         $('squads').innerHTML = teams.map(t => {
-            const r = roster(t.id), mine = String(t.id) === '1'; return `<article class="rounded-2xl border p-4 ${mine ? 'border-indigo-400 bg-indigo-50 ring-1 ring-indigo-200' : 'border-slate-200'}"><div class="flex justify-between"><b>${mine ? '★ La tua squadra · ' : ''}${esc(t.name)}</b><b>${m(t.credits)} cr</b></div><p class="mt-1 text-xs text-slate-500">${r.length}/25 · P ${count(t.id, 'P')} · D ${count(t.id, 'D')} · C ${count(t.id, 'C')} · A ${count(t.id, 'A')}</p><p class="mt-3 text-xs text-slate-600">${r.length ? r.slice(-5).map(p => `${esc(p.playerName)} (${p.price})`).join(' · ') : 'Nessun acquisto'}</p></article>`
+            const r = roster(t.id), mine = String(t.id) === '1'; return `<article class="rounded-2xl border p-4 ${mine ? 'border-brand-400 bg-brand-50 ring-1 ring-brand-200' : 'border-slate-200'}"><div class="flex justify-between"><b>${mine ? '★ La tua squadra · ' : ''}${esc(t.name)}</b><b>${m(t.credits)} cr</b></div><p class="mt-1 text-xs text-slate-500">${r.length}/25 · P ${count(t.id, 'P')} · D ${count(t.id, 'D')} · C ${count(t.id, 'C')} · A ${count(t.id, 'A')}</p><p class="mt-3 text-xs text-slate-600">${r.length ? r.slice(-5).map(p => `${esc(p.playerName)} (${p.price})`).join(' · ') : 'Nessun acquisto'}</p></article>`
         }).join('')
     }
     function recent() {
@@ -142,7 +142,7 @@ const AuctionApp = (() => {
         })
     }
     return {
-        init
+        init, getSelected: () => selected
     }
 })();
 document.addEventListener('DOMContentLoaded', () => AuctionApp.init().catch(error => {
