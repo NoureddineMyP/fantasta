@@ -1,5 +1,5 @@
 const AuctionApp = (() => {
-    let players = [], teams = [], settings = {}, selected = null, state = {
+    let players = [], teams = [], settings = {}, selected = null, onSelect = null, state = {
         purchases: []
     };
 
@@ -49,7 +49,7 @@ const AuctionApp = (() => {
         const q = $('playerSearch').value.trim().toLowerCase(), box = $('playerSuggestions'); if (!q) {
             box.classList.add('hidden'); return
         } const items = available().filter(p => p.name.toLowerCase().includes(q) || String(p.team).toLowerCase().includes(q)).slice(0, 15); box.innerHTML = items.length ? items.map(p => `<button data-id="${esc(p.id)}" class="block w-full border-b border-slate-100 px-4 py-3 text-left hover:bg-slate-50"><b>${esc(p.name)}</b><span class="ml-2 text-xs text-slate-500">${esc(p.team)} · ${p.role} · FM ${n(p.fm).toFixed(2)}</span></button>`).join('') : '<p class="p-4 text-sm text-slate-500">Nessun giocatore disponibile.</p>'; box.classList.remove('hidden'); box.querySelectorAll('[data-id]').forEach(x => x.onclick = () => {
-            selected = available().find(p => String(p.id) === x.dataset.id); $('playerSearch').value = selected.name; box.classList.add('hidden'); renderAll()
+            selected = available().find(p => String(p.id) === x.dataset.id); $('playerSearch').value = selected.name; box.classList.add('hidden'); renderAll(); if (onSelect) onSelect(selected)
         })
     }
     function advice() {
@@ -142,7 +142,7 @@ const AuctionApp = (() => {
         })
     }
     return {
-        init, getSelected: () => selected
+        init, getSelected: () => selected, setOnSelect: fn => { onSelect = fn }
     }
 })();
 document.addEventListener('DOMContentLoaded', () => AuctionApp.init().catch(error => {

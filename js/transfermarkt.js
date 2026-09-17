@@ -23,6 +23,9 @@ const Transfermarkt = (() => {
   }
   const loading = msg => `<p class="text-sm text-slate-500">${esc(msg)}</p>`;
   const errorBox = msg => `<p class="text-sm text-red-600">${esc(msg)}</p>`;
+  // Transfermarkt usa come seasonID l'anno di inizio stagione (es. "2023" = 2023/24).
+  const seasonLabel = id => { const y = Number(id); return Number.isFinite(y) ? `${y}/${String((y + 1) % 100).padStart(2, '0')}` : (id || '—'); };
+  const seasonFromDate = s => { const d = new Date(s); if (Number.isNaN(d.getTime())) return null; const y = d.getFullYear(), m = d.getMonth() + 1; return String(m >= 7 ? y : y - 1); };
 
   async function search(query) {
     const response = await fetch(`./api/transfermarkt?action=search&q=${encodeURIComponent(query)}`);
@@ -62,19 +65,34 @@ const Transfermarkt = (() => {
       sections.push(active
         ? `<div class="rounded-xl border border-red-100 bg-red-50 p-3"><p class="text-xs font-bold uppercase text-red-600">Infortunio in corso</p><p class="mt-1 text-sm font-semibold text-red-900">${esc(active.injury)}</p><p class="text-xs text-red-700">dal ${fdate(active.fromDate)}${active.untilDate ? ' al ' + fdate(active.untilDate) : ' · rientro non ancora stimato'}</p></div>`
         : `<p class="text-xs font-semibold text-emerald-700">✓ Nessun infortunio in corso su Transfermarkt.</p>`);
-      const recent = list.filter(i => i !== active).slice(0, 3);
-      if (recent.length) sections.push(`<div><p class="text-xs font-bold uppercase text-slate-400">Storico infortuni recenti</p><div class="mt-1 space-y-1">${recent.map(i => `<p class="text-xs text-slate-600">${esc(i.injury)} — ${fdate(i.fromDate)}${i.untilDate ? ' → ' + fdate(i.untilDate) : ''}${i.gamesMissed ? ` (${i.gamesMissed} partite saltate)` : ''}</p>`).join('')}</div></div>`);
     } else if (inj?.error) sections.push(`<p class="text-xs text-amber-700">Infortuni non disponibili (${esc(inj.error)}).</p>`);
 
-    if (st && !st.error && st.stats?.length) {
-      const rows = st.stats.filter(s => n(s.appearances) > 0 || n(s.minutesPlayed) > 0);
-      const totals = rows.reduce((a, s) => ({ app: a.app + n(s.appearances), goals: a.goals + n(s.goals), assists: a.assists + n(s.assists), yellow: a.yellow + n(s.yellowCards), red: a.red + n(s.redCards), min: a.min + n(s.minutesPlayed) }), { app: 0, goals: 0, assists: 0, yellow: 0, red: 0, min: 0 });
-      sections.push(`<div><p class="text-xs font-bold uppercase text-slate-400">Rendimento per competizione</p>
-        <div class="mt-1 overflow-x-auto"><table class="w-full text-xs"><thead><tr class="text-slate-400"><th class="text-left font-semibold">Competizione</th><th>PG</th><th>G</th><th>A</th><th>Amm.</th><th>Esp.</th><th>Min.</th></tr></thead><tbody>
-        ${rows.map(s => `<tr class="border-t border-slate-100"><td class="py-1 text-left">${esc(s.competitionName)}</td><td class="text-center">${n(s.appearances)}</td><td class="text-center">${n(s.goals)}</td><td class="text-center">${n(s.assists)}</td><td class="text-center">${n(s.yellowCards)}</td><td class="text-center">${n(s.redCards)}</td><td class="text-center">${n(s.minutesPlayed)}</td></tr>`).join('')}
-        ${rows.length > 1 ? `<tr class="border-t border-slate-200 font-bold"><td class="py-1 text-left">Totale</td><td class="text-center">${totals.app}</td><td class="text-center">${totals.goals}</td><td class="text-center">${totals.assists}</td><td class="text-center">${totals.yellow}</td><td class="text-center">${totals.red}</td><td class="text-center">${totals.min}</td></tr>` : ''}
-        </tbody></table></div></div>`);
-    } else if (st?.error) sections.push(`<p class="text-xs text-amber-700">Statistiche non disponibili (${esc(st.error)}).</p>`);
+    // Tabella unica per stagione: presenze, gol, assist (da "stats") e partite saltate per infortunio (da "injuries").
+    const hasStats = st && !st.error && st.stats?.length;
+    const hasInjuries = inj && !inj.error && inj.injuries?.length;
+    if (hasStats || hasInjuries) {
+      const bySeason = {};
+      const ensure = id => (bySeason[id] ??= { season: id, app: 0, goals: 0, assists: 0, missed: 0 });
+      if (hasStats) st.stats.filter(s => n(s.appearances) > 0 || n(s.minutesPlayed) > 0).forEach(s => {
+        const b = ensure(s.seasonID || '—');
+        b.app += n(s.appearances); b.goals += n(s.goals); b.assists += n(s.assists);
+      });
+      if (hasInjuries) inj.injuries.forEach(i => {
+        const season = seasonFromDate(i.fromDate);
+        if (season === null) return;
+        ensure(season).missed += n(i.gamesMissed);
+      });
+      const seasons = Object.values(bySeason).sort((a, b) => Number(b.season) - Number(a.season)).slice(0, 8);
+      if (seasons.length) {
+        const totals = seasons.reduce((a, s) => ({ app: a.app + s.app, goals: a.goals + s.goals, assists: a.assists + s.assists, missed: a.missed + s.missed }), { app: 0, goals: 0, assists: 0, missed: 0 });
+        sections.push(`<div><p class="text-xs font-bold uppercase text-slate-400">Storico per stagione</p>
+          <div class="mt-1 overflow-x-auto"><table class="w-full text-xs"><thead><tr class="text-slate-400"><th class="text-left font-semibold">Stagione</th><th>PG</th><th>Gol</th><th>Assist</th><th>Salt. inf.</th></tr></thead><tbody>
+          ${seasons.map(s => `<tr class="border-t border-slate-100"><td class="py-1 text-left font-semibold text-slate-700">${esc(seasonLabel(s.season))}</td><td class="text-center">${s.app}</td><td class="text-center">${s.goals}</td><td class="text-center">${s.assists}</td><td class="text-center${s.missed ? ' font-semibold text-red-600' : ''}">${s.missed || '—'}</td></tr>`).join('')}
+          ${seasons.length > 1 ? `<tr class="border-t border-slate-200 font-bold"><td class="py-1 text-left">Totale</td><td class="text-center">${totals.app}</td><td class="text-center">${totals.goals}</td><td class="text-center">${totals.assists}</td><td class="text-center">${totals.missed || '—'}</td></tr>` : ''}
+          </tbody></table></div></div>`);
+      }
+    }
+    if (st?.error) sections.push(`<p class="text-xs text-amber-700">Statistiche non disponibili (${esc(st.error)}).</p>`);
 
     if (mv && !mv.error && mv.marketValueHistory?.length) {
       const peak = mv.marketValueHistory.reduce((a, h) => n(h.marketValue) > n(a?.marketValue) ? h : a, mv.marketValueHistory[0]);

@@ -97,51 +97,56 @@
               acquisto</button>
           </div>
         </div>
-        <div id="bidAdvice" class="rounded-3xl border border-indigo-100 bg-indigo-50 p-5">
-          <p class="text-sm text-slate-500">Seleziona un giocatore per ricevere il tetto consigliato.</p>
-        </div>
         <div id="strategicAdvice" class="rounded-3xl border border-violet-100 bg-violet-50 p-5">
           <p class="text-sm text-slate-500">La priorità della rosa apparirà qui.</p>
         </div>
         <div id="rosterAudit" class="rounded-3xl border border-emerald-100 bg-emerald-50 p-5">
           <p class="text-sm text-slate-500">L'audit della rosa apparirà qui.</p>
         </div>
-        <div class="rounded-3xl border border-sky-100 bg-sky-50 p-5">
-          <div class="flex flex-wrap items-start justify-between gap-3">
-            <div>
-              <p class="text-xs font-bold uppercase text-sky-600">Transfermarkt</p>
-              <p class="mt-1 text-lg font-extrabold">Statistiche del giocatore selezionato</p>
-            </div>
-            <button id="tmLookup"
-              class="rounded-xl bg-sky-700 px-4 py-2 text-sm font-bold text-white transition hover:bg-sky-600">Cerca
-              statistiche</button>
-          </div>
-          <div id="tmPanel" class="mt-3 text-sm text-slate-600">Seleziona un giocatore sul palco, poi premi "Cerca
-            statistiche" per profilo, infortuni, presenze/gol/assist, valore di mercato e ultimo trasferimento (dati
-            non ufficiali da Transfermarkt).</div>
-        </div>
         <div class="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
           <h2 class="text-lg font-extrabold">Rose</h2>
           <div id="squads" class="mt-4 grid gap-3 md:grid-cols-2"></div>
         </div>
       </div>
-      <aside class="h-fit rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
-        <h2 class="text-lg font-extrabold">Ultimi acquisti</h2>
-        <div id="recentPurchases" class="mt-3"></div>
-        <p class="mt-5 rounded-2xl bg-slate-50 p-4 text-xs leading-5 text-slate-500">I dati vengono salvati su questo
-          browser. Apri la dashboard per un riepilogo aggiornato.</p>
+      <aside class="h-fit space-y-6 lg:sticky lg:top-20">
+        <div id="bidAdvice" class="rounded-3xl border border-indigo-100 bg-indigo-50 p-5">
+          <p class="text-sm text-slate-500">Seleziona un giocatore per ricevere il tetto consigliato.</p>
+        </div>
+        <div class="rounded-3xl border border-sky-100 bg-sky-50 p-5">
+          <div class="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <p class="text-xs font-bold uppercase text-sky-600">Transfermarkt</p>
+              <p class="mt-1 text-lg font-extrabold">Statistiche del giocatore</p>
+            </div>
+            <button id="tmLookup"
+              class="rounded-xl bg-sky-700 px-4 py-2 text-sm font-bold text-white transition hover:bg-sky-600">Aggiorna</button>
+          </div>
+          <div id="tmPanel" class="mt-3 max-h-[28rem] overflow-y-auto pr-1 text-sm text-slate-600">Seleziona un
+            giocatore sul palco: qui appariranno in automatico profilo, infortuni, storico presenze/gol/assist/partite
+            saltate per stagione, valore di mercato e ultimo trasferimento (dati non ufficiali da Transfermarkt).</div>
+        </div>
+        <div class="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+          <h2 class="text-lg font-extrabold">Ultimi acquisti</h2>
+          <div id="recentPurchases" class="mt-3 max-h-64 overflow-y-auto"></div>
+          <p class="mt-5 rounded-2xl bg-slate-50 p-4 text-xs leading-5 text-slate-500">I dati vengono salvati su
+            questo browser. Apri la dashboard per un riepilogo aggiornato.</p>
+        </div>
       </aside>
     </section>
   </main>
   <script src="./js/auction.js"></script>
   <script src="./js/transfermarkt.js"></script>
   <script>
-    document.getElementById('tmLookup').addEventListener('click', () => {
-      const panel = document.getElementById('tmPanel');
+    const tmPanel = document.getElementById('tmPanel');
+    function runTmLookup() {
       const player = AuctionApp.getSelected();
-      if (!player) { panel.innerHTML = '<p class="text-sm text-red-600">Seleziona prima un giocatore sul palco.</p>'; return; }
-      Transfermarkt.lookup(player.name, player.team, panel);
-    });
+      if (!player) { tmPanel.innerHTML = '<p class="text-sm text-red-600">Seleziona prima un giocatore sul palco.</p>'; return; }
+      Transfermarkt.lookup(player.name, player.team, tmPanel);
+    }
+    document.getElementById('tmLookup').addEventListener('click', runTmLookup);
+    // Appena selezioni un giocatore in "1. Giocatore sul palco", le statistiche si caricano
+    // da sole nel riquadro laterale: niente più click extra né scroll fino in fondo.
+    AuctionApp.setOnSelect(runTmLookup);
   </script>
 </body>
 
