@@ -21,6 +21,11 @@ async function fetchOnce(path) {
   let data = {};
   try { data = raw ? JSON.parse(raw) : {}; } catch { /* risposta non JSON (es. pagina di errore html) */ }
   if (!response.ok) {
+    if (response.status === 403) {
+      const err = new Error('Transfermarkt ha bloccato le richieste provenienti dall\'IP condiviso dell\'istanza pubblica (403 Forbidden) — non è un problema del progetto. Serve ospitare una propria istanza di transfermarkt-api su un IP non ancora bloccato.');
+      err.status = 403;
+      throw err;
+    }
     const detail = data.detail || (raw ? raw.slice(0, 200) : null);
     const err = new Error(detail ? `${detail} (HTTP ${response.status})` : `Errore ${response.status} da transfermarkt-api.`);
     err.status = response.status;
