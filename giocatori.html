@@ -28,23 +28,23 @@
 
 <body class="min-h-screen bg-[#F6F7F5] font-sans text-slate-900">
     <nav class="sticky top-0 z-30 bg-gradient-to-r from-brand-800 to-brand-600 text-white shadow-sm">
-        <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-            <a href="./index.html" class="flex items-center gap-2.5 font-extrabold tracking-tight">
-                <span class="grid h-8 w-8 place-items-center rounded-lg bg-white/15 text-sm">FA</span>
-                Fanta Asta <span class="font-medium text-brand-200">26/27</span>
+        <div class="mx-auto flex max-w-7xl items-center justify-between gap-2 overflow-x-auto px-3 py-3 sm:gap-4 sm:px-6">
+            <a href="./index.html" class="flex shrink-0 items-center gap-2 font-extrabold tracking-tight sm:gap-2.5">
+                <span class="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-white/15 text-sm">FA</span>
+                <span class="hidden sm:inline">Fanta Asta <span class="font-medium text-brand-200">26/27</span></span>
             </a>
-            <div class="flex items-center gap-1 text-sm font-semibold">
-                <a href="./index.html" class="rounded-lg px-3 py-2 transition hover:bg-white/10">Dashboard</a>
-                <a href="./asta.html" class="rounded-lg px-3 py-2 transition hover:bg-white/10">Asta live</a>
-                <a href="./giocatori.html" class="rounded-lg bg-white/15 px-3 py-2">Giocatori</a>
+            <div class="flex shrink-0 items-center gap-0.5 text-xs font-semibold sm:gap-1 sm:text-sm">
+                <a href="./index.html" class="whitespace-nowrap rounded-lg px-2.5 py-2 transition hover:bg-white/10 sm:px-3">Dashboard</a>
+                <a href="./asta.html" class="whitespace-nowrap rounded-lg px-2.5 py-2 transition hover:bg-white/10 sm:px-3">Asta live</a>
+                <a href="./giocatori.html" class="whitespace-nowrap rounded-lg bg-white/15 px-2.5 py-2 sm:px-3">Giocatori</a>
             </div>
         </div>
     </nav>
     <header class="border-b border-slate-200 bg-white">
         <div class="mx-auto max-w-7xl px-4 py-5 sm:px-6">
-            <div class="flex items-center justify-between">
+            <div class="flex flex-wrap items-center justify-between gap-3">
                 <div>
-                    <h1 class="text-2xl font-extrabold tracking-tight">Database giocatori</h1>
+                    <h1 class="text-xl font-extrabold tracking-tight sm:text-2xl">Database giocatori</h1>
                     <p class="text-sm text-slate-500">Lista completa · 587 giocatori</p>
                 </div>
                 <div id="resultCount" class="rounded-2xl bg-brand-700 px-4 py-3 font-bold text-white">—</div>
@@ -65,9 +65,9 @@
                 <select id="teamFilter" class="rounded-xl border border-slate-200 px-4 py-3">
                     <option value="">Tutte le squadre</option>
                 </select>
-                <div class="flex gap-2">
-                    <label class="flex items-center gap-2 border border-slate-200 rounded-xl px-3"><input id="onlyListed" type="checkbox" class="accent-brand-600"> Solo in lista</label>
-                    <button id="resetFilters" class="rounded-xl bg-slate-100 px-4 font-bold transition hover:bg-slate-200">Reset</button>
+                <div class="flex flex-wrap gap-2">
+                    <label class="flex items-center gap-2 border border-slate-200 rounded-xl px-3 py-3 md:py-0"><input id="onlyListed" type="checkbox" class="accent-brand-600"> Solo in lista</label>
+                    <button id="resetFilters" class="rounded-xl bg-slate-100 px-4 py-3 font-bold transition hover:bg-slate-200 md:py-0">Reset</button>
                 </div>
             </div>
         </section>
@@ -92,7 +92,7 @@
         <section id="playersCards" class="grid gap-3 mt-6 md:hidden"></section>
     </main>
     <div id="modal" class="fixed inset-0 hidden items-center justify-center bg-black/50 p-4">
-        <div class="bg-white rounded-3xl p-6 w-full max-w-2xl">
+        <div class="bg-white rounded-3xl p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
             <div class="flex justify-end"><button id="closeModal"
                     class="bg-slate-100 rounded-xl px-3 py-2 font-bold transition hover:bg-slate-200">Chiudi</button></div>
             <div id="modalBody"></div>

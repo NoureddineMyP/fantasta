@@ -67,7 +67,9 @@ const Transfermarkt = (() => {
         : `<p class="text-xs font-semibold text-emerald-700">✓ Nessun infortunio in corso su Transfermarkt.</p>`);
     } else if (inj?.error) sections.push(`<p class="text-xs text-amber-700">Infortuni non disponibili (${esc(inj.error)}).</p>`);
 
-    // Tabella unica per stagione: presenze, gol, assist (da "stats") e partite saltate per infortunio (da "injuries").
+    // Tabella: presenze/gol/assist (solo stagione in corso: l'endpoint Transfermarkt non fornisce
+    // uno storico di anni passati) + partite saltate per infortunio per stagione (qui sì disponibile
+    // su più anni, perché arriva da un endpoint diverso con lo storico infortuni completo).
     const hasStats = st && !st.error && st.stats?.length;
     const hasInjuries = inj && !inj.error && inj.injuries?.length;
     if (hasStats || hasInjuries) {
@@ -85,12 +87,17 @@ const Transfermarkt = (() => {
       const seasons = Object.values(bySeason).sort((a, b) => Number(b.season) - Number(a.season)).slice(0, 8);
       if (seasons.length) {
         const totals = seasons.reduce((a, s) => ({ app: a.app + s.app, goals: a.goals + s.goals, assists: a.assists + s.assists, missed: a.missed + s.missed }), { app: 0, goals: 0, assists: 0, missed: 0 });
-        sections.push(`<div><p class="text-xs font-bold uppercase text-slate-400">Storico per stagione</p>
+        sections.push(`<div><p class="text-xs font-bold uppercase text-slate-400">Presenze, gol, assist e partite saltate</p>
+          <p class="mt-0.5 text-[11px] italic text-slate-400">PG/Gol/Assist solo stagione in corso · infortuni con storico completo</p>
           <div class="mt-1 overflow-x-auto"><table class="w-full text-xs"><thead><tr class="text-slate-400"><th class="text-left font-semibold">Stagione</th><th>PG</th><th>Gol</th><th>Assist</th><th>Salt. inf.</th></tr></thead><tbody>
           ${seasons.map(s => `<tr class="border-t border-slate-100"><td class="py-1 text-left font-semibold text-slate-700">${esc(seasonLabel(s.season))}</td><td class="text-center">${s.app}</td><td class="text-center">${s.goals}</td><td class="text-center">${s.assists}</td><td class="text-center${s.missed ? ' font-semibold text-red-600' : ''}">${s.missed || '—'}</td></tr>`).join('')}
           ${seasons.length > 1 ? `<tr class="border-t border-slate-200 font-bold"><td class="py-1 text-left">Totale</td><td class="text-center">${totals.app}</td><td class="text-center">${totals.goals}</td><td class="text-center">${totals.assists}</td><td class="text-center">${totals.missed || '—'}</td></tr>` : ''}
           </tbody></table></div></div>`);
       }
+    } else if (st && !st.error) {
+      // stats.stats è arrivato vuoto: o il giocatore non ha ancora presenze ufficiali questa stagione
+      // su Transfermarkt, o quella pagina non è stata letta correttamente in questo momento.
+      sections.push(`<p class="text-xs text-slate-500">Nessuna presenza risulta ancora su Transfermarkt per la stagione in corso (può succedere a inizio stagione, o se la scheda non è aggiornata). Lo storico infortuni resta comunque affidabile.</p>`);
     }
     if (st?.error) sections.push(`<p class="text-xs text-amber-700">Statistiche non disponibili (${esc(st.error)}).</p>`);
 
