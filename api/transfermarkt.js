@@ -1,6 +1,16 @@
 // Proxy verso l'API interna JSON di Transfermarkt (stessa usata dal sito).
 // Normalizza le risposte nello shape atteso da js/transfermarkt.js.
-const BASE = process.env.TRANSFERMARKT_API_BASE_URL || 'https://tmapi-alpha.transfermarkt.technology';
+// Ignora TRANSFERMARKT_API_BASE_URL se punta ancora allo scraper Fly.dev:
+// su quell'host i path nuovi (`/player/{id}`, `/performance-game`, …) rispondono 404.
+function tmBases() {
+  const fromEnv = String(process.env.TRANSFERMARKT_API_BASE_URL || '').replace(/\/$/, '');
+  const valid = fromEnv && /transfermarkt\.technology$/i.test(fromEnv) ? [fromEnv] : [];
+  return [...new Set([
+    ...valid,
+    'https://tmapi-alpha.transfermarkt.technology',
+    'https://tmapi.transfermarkt.technology'
+  ])];
+}
 const TM_HEADERS = {
   Accept: 'application/json',
   'Accept-Language': 'it-IT,it;q=0.9,en;q=0.8',
@@ -23,16 +33,18 @@ function unwrap(json, fallbackMessage) {
   return json && Object.prototype.hasOwnProperty.call(json, 'data') ? json.data : json;
 }
 
-async function fetchTm(path, timeoutMs = 12000) {
+async function fetchOnce(base, path, timeoutMs) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
   let response;
   try {
-    response = await fetch(`${BASE}${path}`, { headers: TM_HEADERS, signal: controller.signal });
+    response = await fetch(`${base}${path}`, { headers: TM_HEADERS, signal: controller.signal });
   } catch (error) {
-    throw new Error(error.name === 'AbortError'
+    const err = new Error(error.name === 'AbortError'
       ? 'Timeout nel contattare Transfermarkt.'
       : `Impossibile contattare Transfermarkt: ${error.message}`);
+    err.status = error.name === 'AbortError' ? 504 : 502;
+    throw err;
   } finally {
     clearTimeout(timeout);
   }
@@ -45,6 +57,20 @@ async function fetchTm(path, timeoutMs = 12000) {
     throw err;
   }
   return unwrap(json, 'Risposta Transfermarkt non valida.');
+}
+
+async function fetchTm(path, timeoutMs = 12000) {
+  const bases = tmBases();
+  let lastError;
+  for (const base of bases) {
+    try {
+      return await fetchOnce(base, path, timeoutMs);
+    } catch (error) {
+      lastError = error;
+      if (error.status && error.status !== 404 && error.status < 500) throw error;
+    }
+  }
+  throw lastError || new Error('Impossibile contattare Transfermarkt.');
 }
 
 async function safe(fn) {
