@@ -149,5 +149,49 @@ const Transfermarkt = (() => {
     }
   }
 
-  return { lookup };
+  function summarizeSeasons(data) {
+    const by = {};
+    const ensure = id => (by[id] ??= { season: id, app: 0, goals: 0, assists: 0, missed: 0 });
+    if (data.stats && !data.stats.error) (data.stats.stats || []).forEach(s => {
+      const row = ensure(String(s.seasonID || '—'));
+      row.app += n(s.appearances);
+      row.goals += n(s.goals);
+      row.assists += n(s.assists);
+    });
+    if (data.injuries && !data.injuries.error) (data.injuries.injuries || []).forEach(i => {
+      const season = i.seasonId || seasonFromDate(i.fromDate);
+      if (season == null) return;
+      ensure(String(season)).missed += n(i.gamesMissed);
+    });
+    const today = new Date();
+    const active = data.injuries && !data.injuries.error
+      ? (data.injuries.injuries || []).find(i => !i.untilDate || new Date(i.untilDate) >= today)
+      : null;
+    return {
+      last: by['2025'] || { season: '2025', app: 0, goals: 0, assists: 0, missed: 0 },
+      current: by['2026'] || { season: '2026', app: 0, goals: 0, assists: 0, missed: 0 },
+      injured: active ? active.injury : null,
+      updatedAt: data.updatedAt || new Date().toISOString()
+    };
+  }
+
+  async function resolveId(name, club) {
+    const key = `${name}|${club || ''}`;
+    const cached = idCache()[key];
+    if (cached) return cached;
+    const results = await search(surname(name));
+    if (!results.length) throw new Error(`Nessun risultato su Transfermarkt per "${surname(name)}".`);
+    const ownClub = normalize(club);
+    const match = results.find(r => ownClub && normalize(r.club?.name).includes(ownClub)) || (results.length === 1 ? results[0] : null);
+    if (!match) throw new Error(`Più omonimi su Transfermarkt per "${name}".`);
+    saveId(key, match.id);
+    return match.id;
+  }
+
+  async function fetchSummary(name, club) {
+    const data = await fullData(await resolveId(name, club));
+    return summarizeSeasons(data);
+  }
+
+  return { lookup, fetchSummary };
 })();

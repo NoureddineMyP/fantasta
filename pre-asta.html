@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="it">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pre-asta · Fanta Asta 26/27</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Manrope', 'ui-sans-serif', 'system-ui', 'sans-serif'] },
+          colors: {
+            brand: { 50: '#EEF6F1', 100: '#D7EBDD', 200: '#AFD7BC', 300: '#7EBC95', 400: '#4C9C6D', 500: '#2B7F4F', 600: '#1F6B41', 700: '#185535', 800: '#123F27', 900: '#0C2A1A' },
+            gold: { 50: '#FBF6E9', 100: '#F3E6C0', 200: '#E7CE8A', 300: '#D8B45C', 400: '#C89B3C', 500: '#AD8330' }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="min-h-screen bg-[#F6F7F5] font-sans text-slate-900">
+  <nav class="sticky top-0 z-30 bg-gradient-to-r from-brand-800 to-brand-600 text-white shadow-sm">
+    <div class="mx-auto flex max-w-7xl items-center justify-between gap-2 overflow-x-auto px-3 py-3 sm:gap-4 sm:px-6">
+      <a href="./index.html" class="flex shrink-0 items-center gap-2 font-extrabold tracking-tight sm:gap-2.5">
+        <span class="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-white/15 text-sm">FA</span>
+        <span class="hidden sm:inline">Fanta Asta <span class="font-medium text-brand-200">26/27</span></span>
+      </a>
+      <div class="flex shrink-0 items-center gap-0.5 text-xs font-semibold sm:gap-1 sm:text-sm">
+        <a href="./index.html" class="whitespace-nowrap rounded-lg px-2.5 py-2 transition hover:bg-white/10 sm:px-3">Dashboard</a>
+        <a href="./pre-asta.html" class="whitespace-nowrap rounded-lg bg-white/15 px-2.5 py-2 sm:px-3">Pre-asta</a>
+        <a href="./asta.html" class="whitespace-nowrap rounded-lg px-2.5 py-2 transition hover:bg-white/10 sm:px-3">Asta live</a>
+        <a href="./giocatori.html" class="whitespace-nowrap rounded-lg px-2.5 py-2 transition hover:bg-white/10 sm:px-3">Giocatori</a>
+      </div>
+    </div>
+  </nav>
+  <header class="border-b border-slate-200 bg-white">
+    <div class="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+      <div>
+        <h1 class="text-xl font-extrabold tracking-tight sm:text-2xl">Shortlist pre-asta</h1>
+        <p class="text-sm text-slate-500">Costruisci la rosa presunta, rispetta le quote per reparto e ricevi avvisi su crediti e rendimento 25/26 vs 26/27.</p>
+      </div>
+      <button id="resetList" class="self-start rounded-xl border border-red-200 bg-red-50 px-4 py-2 text-sm font-bold text-red-700 transition hover:bg-red-100">Svuota lista</button>
+    </div>
+  </header>
+  <main id="app" class="mx-auto max-w-7xl px-4 py-6 sm:px-6">
+    <section class="grid gap-4 sm:grid-cols-3">
+      <div class="rounded-2xl border border-slate-200 bg-white p-4">
+        <div class="text-xs font-bold uppercase text-slate-400">In shortlist</div>
+        <div id="listCount" class="mt-1 text-2xl font-extrabold">0/25</div>
+      </div>
+      <div class="rounded-2xl border border-slate-200 bg-white p-4">
+        <div class="text-xs font-bold uppercase text-slate-400">Stima spesa</div>
+        <div id="spendCount" class="mt-1 text-2xl font-extrabold text-gold-500">0</div>
+      </div>
+      <div class="rounded-2xl border border-slate-200 bg-white p-4">
+        <div class="text-xs font-bold uppercase text-slate-400">Crediti residui</div>
+        <div id="leftCount" class="mt-1 text-2xl font-extrabold">750</div>
+      </div>
+    </section>
+
+    <section class="mt-6 grid gap-6 lg:grid-cols-[1.45fr_1fr] lg:items-start">
+      <div class="space-y-6">
+        <div class="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div class="flex flex-wrap items-end justify-between gap-2">
+            <h2 class="text-lg font-extrabold">Quote crediti per reparto</h2>
+            <p class="text-xs text-slate-500">Somma <span id="pctSum">100%</span> · budget 750 cr</p>
+          </div>
+          <div class="mt-4 grid gap-4 sm:grid-cols-2">
+            <label class="text-xs font-bold uppercase tracking-wide text-slate-400">Portieri %
+              <input id="pctP" type="number" min="0" max="100" class="mt-1 block w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm font-normal text-slate-900">
+              <span id="barLabelP" class="mt-1 block font-normal normal-case text-[11px] text-slate-500"></span>
+              <span class="mt-1 block h-2 overflow-hidden rounded-full bg-slate-100"><span id="barP" class="block h-2 rounded-full bg-brand-600" style="width:0%"></span></span>
+            </label>
+            <label class="text-xs font-bold uppercase tracking-wide text-slate-400">Difensori %
+              <input id="pctD" type="number" min="0" max="100" class="mt-1 block w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm font-normal text-slate-900">
+              <span id="barLabelD" class="mt-1 block font-normal normal-case text-[11px] text-slate-500"></span>
+              <span class="mt-1 block h-2 overflow-hidden rounded-full bg-slate-100"><span id="barD" class="block h-2 rounded-full bg-brand-600" style="width:0%"></span></span>
+            </label>
+            <label class="text-xs font-bold uppercase tracking-wide text-slate-400">Centrocampisti %
+              <input id="pctC" type="number" min="0" max="100" class="mt-1 block w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm font-normal text-slate-900">
+              <span id="barLabelC" class="mt-1 block font-normal normal-case text-[11px] text-slate-500"></span>
+              <span class="mt-1 block h-2 overflow-hidden rounded-full bg-slate-100"><span id="barC" class="block h-2 rounded-full bg-brand-600" style="width:0%"></span></span>
+            </label>
+            <label class="text-xs font-bold uppercase tracking-wide text-slate-400">Attaccanti %
+              <input id="pctA" type="number" min="0" max="100" class="mt-1 block w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm font-normal text-slate-900">
+              <span id="barLabelA" class="mt-1 block font-normal normal-case text-[11px] text-slate-500"></span>
+              <span class="mt-1 block h-2 overflow-hidden rounded-full bg-slate-100"><span id="barA" class="block h-2 rounded-full bg-brand-600" style="width:0%"></span></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+          <h2 class="text-lg font-extrabold">Aggiungi alla shortlist</h2>
+          <div class="mt-4 grid gap-3 sm:grid-cols-[1fr_160px]">
+            <div class="relative">
+              <input id="playerSearch" autocomplete="off" placeholder="Cerca giocatore o squadra…"
+                class="w-full rounded-2xl border border-slate-200 px-4 py-4 outline-none transition focus:border-brand-400 focus:ring-2 focus:ring-brand-100">
+              <div id="playerSuggestions" class="absolute z-20 mt-2 hidden max-h-80 w-full overflow-auto rounded-2xl border border-slate-200 bg-white shadow-xl"></div>
+            </div>
+            <select id="roleFilter" class="rounded-2xl border border-slate-200 px-4 py-4 text-sm">
+              <option value="">Tutti i ruoli</option>
+              <option value="P">P · Portieri</option>
+              <option value="D">D · Difensori</option>
+              <option value="C">C · Centrocampisti</option>
+              <option value="A">A · Attaccanti</option>
+            </select>
+          </div>
+          <p class="mt-3 text-xs text-slate-500">La stima crediti usa la FVM su 750 (come in asta live). Puoi correggerla riga per riga.</p>
+        </div>
+
+        <div class="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <h2 class="text-lg font-extrabold">Rosa presunta</h2>
+            <button id="tmRefresh" class="rounded-xl bg-sky-700 px-4 py-2 text-sm font-bold text-white transition hover:bg-sky-600">Prestazioni 25/26 vs 26/27</button>
+          </div>
+          <p id="tmStatus" class="mt-1 text-xs text-slate-500">Opzionale: scarica Transfermarkt per confrontare presenze, gol, assist e infortuni.</p>
+          <div id="wishList" class="mt-4"></div>
+        </div>
+      </div>
+
+      <aside class="space-y-4 lg:sticky lg:top-20">
+        <div>
+          <h2 class="text-lg font-extrabold">Consigli</h2>
+          <p class="text-sm text-slate-500">Crediti, quote, slot e rendimento.</p>
+        </div>
+        <div id="advicePanel" class="space-y-3"></div>
+      </aside>
+    </section>
+  </main>
+  <script src="./js/transfermarkt.js"></script>
+  <script src="./js/pre-asta.js"></script>
+</body>
+
+</html>
